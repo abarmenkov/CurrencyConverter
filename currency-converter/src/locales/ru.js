@@ -4,6 +4,7 @@ const ru = {
             title: 'Расчет обмена валюты',
             language: 'Выбрать язык',
             rates: 'Курсы валют на ',
+            baseCurrency: 'Базовая валюта',
         },
         buttons: {
             calc: 'Калькулятор обмена',

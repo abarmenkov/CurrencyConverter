@@ -22,7 +22,7 @@ const Converter = () => {
     const makeList = (arr) => {
         const keys = Object.keys(arr);
         return keys.map((item) => <option key={arr[item].ID} value={arr[item].CharCode} onClick={() => convertCurrency(arr[item].Value.toFixed(2) / arr[item].Nominal )}>{arr[item].CharCode} - {arr[item].Name}</option>);
-    }
+    };
     const list = exchangeRates? makeList(exchangeRates.Valute): null;
     const result = amount * rate;
     const inputOnChange = (e) => {

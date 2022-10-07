@@ -14,7 +14,9 @@ const CurrencyContextProvider = ({ children}) => {
                 Nominal: 0,
                 NumCode: 0,
             }
-        }
+        },
+        defaultCurrency: "RUB",
+        currencyList: ["RUB"],
 
     };
     const [ exchangeRates, setExchangeRates] = useState(initialState);

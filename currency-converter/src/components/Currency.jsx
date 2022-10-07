@@ -15,10 +15,13 @@ const Currency = () => {
         const fetchRates = async () => {
           const rates = await axios('https://www.cbr-xml-daily.ru/daily_json.js');
           const result = rates.data;
-          setExchangeRates(result);
+          const currencyList1 = Object.keys(result.Valute);
+          const defaultList = exchangeRates.currencyList.slice();
+          const currencyList = defaultList.concat(currencyList1);
+          setExchangeRates({...exchangeRates, ...result, currencyList});
         }
         fetchRates();
-      }, [setExchangeRates])
+      },[]);
 
     const trend = (current, previous) => {
         if (current > previous) return ' ▲';

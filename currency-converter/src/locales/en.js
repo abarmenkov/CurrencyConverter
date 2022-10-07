@@ -2,8 +2,9 @@ const en = {
     translation: {
         header: {
             title: 'Currency Converter',
-            language: 'Choose language',
+            language: 'Language selection',
             rates: 'Rates for ',
+            baseCurrency: 'Base currency',
         },
         buttons: {
             calc: 'Exchange Calc',
