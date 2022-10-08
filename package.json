@@ -1,0 +1,21 @@
+{
+  "name": "currencyconverter",
+  "version": "1.0.0",
+  "description": "Currency converter - Test task",
+  "main": "index.js",
+  "scripts": {
+    "build": "DISABLE_ESLINT_PLUGIN=true npm run build --prefix currency-converter",
+    "start": "cd currency-converter && npm run start",
+    "postinstall": "cd currency-converter && npm ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abarmenkov/CurrencyConverter.git"
+  },
+  "author": "abarmenkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abarmenkov/CurrencyConverter/issues"
+  },
+  "homepage": "https://github.com/abarmenkov/CurrencyConverter#readme"
+}
