@@ -1,27 +1,12 @@
-import React, { useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import CurrencyContext from '../contexts/CurrencyContext';
 import { Card, Table, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-
-
 const Currency = () => {
     const { t } = useTranslation();
-    const [ exchangeRates, setExchangeRates] = useContext(CurrencyContext);
-
-    useEffect(() => {
-        const fetchRates = async () => {
-          const rates = await axios('https://www.cbr-xml-daily.ru/daily_json.js');
-          const result = rates.data;
-          const currencyList1 = Object.keys(result.Valute);
-          const defaultList = exchangeRates.currencyList.slice();
-          const currencyList = defaultList.concat(currencyList1);
-          setExchangeRates({...exchangeRates, ...result, currencyList});
-        }
-        fetchRates();
-      },[]);
+    const [ exchangeRates, ] = useContext(CurrencyContext);
 
     const trend = (current, previous) => {
         if (current > previous) return ' ▲';
@@ -30,8 +15,8 @@ const Currency = () => {
       }
 
     const getCrossRate = (rate, nominal) => {
-        const rateToRub = rate.toFixed(2) / nominal;
-        const defaultRateToRub = exchangeRates.Valute[exchangeRates.defaultCurrency].Value.toFixed(2) / exchangeRates.Valute[exchangeRates.defaultCurrency].Nominal;
+        const rateToRub = rate.toFixed(3) / nominal;
+        const defaultRateToRub = exchangeRates.Valute[exchangeRates.defaultCurrency].Value.toFixed(3) / exchangeRates.Valute[exchangeRates.defaultCurrency].Nominal;
         return (rateToRub / defaultRateToRub).toFixed(3);
 
     }
@@ -44,7 +29,7 @@ const Currency = () => {
         <td>{arr[item].CharCode}</td>
         <td>{exchangeRates.defaultCurrency === "RUB" ? arr[item].Nominal : 1}</td>
         <td>{arr[item].Name}</td>
-        <td>{exchangeRates.defaultCurrency === "RUB" ? arr[item].Value.toFixed(2) : getCrossRate(arr[item].Value, arr[item].Nominal)}</td>
+        <td>{exchangeRates.defaultCurrency === "RUB" ? arr[item].Value.toFixed(3) : getCrossRate(arr[item].Value, arr[item].Nominal)}</td>
         {exchangeRates.defaultCurrency === "RUB" && <td>{trend(arr[item].Value, arr[item].Previous)}</td>}
         </tr>
         );
