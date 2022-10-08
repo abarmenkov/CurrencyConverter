@@ -20,7 +20,7 @@ const en = {
         converter: {
             currencyselect: 'Select currency',
             exchangeamount: 'Amount',
-            exchangeresult: 'Result in roubles',
+            exchangeresult: 'Result in ',
             roubles: 'roubles',
         }
     }

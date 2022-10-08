@@ -29,15 +29,23 @@ const Currency = () => {
         return '';
       }
 
+    const getCrossRate = (rate, nominal) => {
+        const rateToRub = rate.toFixed(2) / nominal;
+        const defaultRateToRub = exchangeRates.Valute[exchangeRates.defaultCurrency].Value.toFixed(2) / exchangeRates.Valute[exchangeRates.defaultCurrency].Nominal;
+        return (rateToRub / defaultRateToRub).toFixed(3);
+
+    }
+
     const makeList = (arr) => {
         const keys = Object.keys(arr);
-        return keys.map((item) => <tr key={arr[item].ID}>
+        return keys.filter((key) => key !== exchangeRates.defaultCurrency)
+        .map((item) => <tr key={arr[item].ID}>
         <td>{arr[item].NumCode}</td>
         <td>{arr[item].CharCode}</td>
-        <td>{arr[item].Nominal}</td>
+        <td>{exchangeRates.defaultCurrency === "RUB" ? arr[item].Nominal : 1}</td>
         <td>{arr[item].Name}</td>
-        <td>{arr[item].Value.toFixed(2)}</td>
-        <td>{trend(arr[item].Value, arr[item].Previous)}</td>
+        <td>{exchangeRates.defaultCurrency === "RUB" ? arr[item].Value.toFixed(2) : getCrossRate(arr[item].Value, arr[item].Nominal)}</td>
+        {exchangeRates.defaultCurrency === "RUB" && <td>{trend(arr[item].Value, arr[item].Previous)}</td>}
         </tr>
         );
     }
@@ -55,7 +63,7 @@ const Currency = () => {
                     <th>{t('currencyTable.nominal')}</th>
                     <th>{t('currencyTable.name')}</th>
                     <th>{t('currencyTable.value')}</th>
-                    <th></th>
+                    {exchangeRates.defaultCurrency === "RUB" && <th></th>}
                 </tr>
               </thead>
               <tbody>
@@ -75,4 +83,3 @@ const Currency = () => {
     )
 }
 export default Currency;
-

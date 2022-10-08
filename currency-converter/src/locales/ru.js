@@ -20,7 +20,7 @@ const ru = {
         converter: {
             currencyselect: 'Выберите валюту для обмена',
             exchangeamount: 'Количество',
-            exchangeresult: 'Итого в рублях',
+            exchangeresult: 'Итого в ',
             roubles: 'руб.',
         }
     }

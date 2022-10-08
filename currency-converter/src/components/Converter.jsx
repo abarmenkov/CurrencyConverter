@@ -21,10 +21,11 @@ const Converter = () => {
 
     const makeList = (arr) => {
         const keys = Object.keys(arr);
-        return keys.map((item) => <option key={arr[item].ID} value={arr[item].CharCode} onClick={() => convertCurrency(arr[item].Value.toFixed(2) / arr[item].Nominal )}>{arr[item].CharCode} - {arr[item].Name}</option>);
+        return keys.filter((key) => key !== exchangeRates.defaultCurrency)
+        .map((item) => <option key={arr[item].ID} value={arr[item].CharCode} onClick={() => convertCurrency(arr[item].Value.toFixed(2) / arr[item].Nominal )}>{arr[item].CharCode} - {arr[item].Name}</option>);
     };
     const list = exchangeRates? makeList(exchangeRates.Valute): null;
-    const result = amount * rate;
+    const result = exchangeRates.defaultCurrency === "RUB" ? amount * rate: amount * (rate / (exchangeRates.Valute[exchangeRates.defaultCurrency].Value.toFixed(2) / exchangeRates.Valute[exchangeRates.defaultCurrency].Nominal));
     const inputOnChange = (e) => {
         e.preventDefault();
         setAmount(e.target.value);
@@ -48,8 +49,8 @@ const Converter = () => {
                     <Form.Control className="mr-5 ml-5" type="text" placeholder="Amount" value={amount} onChange={inputOnChange}></Form.Control>
                 </Col>
                 <Col sm={4}>
-                    <Form.Label>{t('converter.exchangeresult')}</Form.Label>
-                    <InputGroup.Text>{result.toFixed(2)} {t('converter.roubles')}</InputGroup.Text>
+                    <Form.Label>{t('converter.exchangeresult')}{exchangeRates.defaultCurrency}</Form.Label>
+                    <InputGroup.Text>{result.toFixed(2)} {exchangeRates.defaultCurrency}</InputGroup.Text>
                 </Col>
             </Row>
 
