@@ -22,6 +22,9 @@ import CurrencyContext from '../contexts/CurrencyContext';
       return arr.map((item, index) => <option key={index} value={item} onClick={() => changeBaseCurrency(item)}>{item}</option>);
   };
   const list = exchangeRates? makeList(exchangeRates.currencyList): null;
+  if (typeof document !== 'undefined') {
+    var isTouch = 'ontouchstart' in document.documentElement;
+  }
 
     return (
     <>
@@ -36,12 +39,12 @@ import CurrencyContext from '../contexts/CurrencyContext';
 
           <Form.Select size="sm" defaultValue={lang}>
             <option value="en" 
-            onClick={() => changeLanguage('en')}
-            onTouchEnd={() => changeLanguage('en')}
+            onTouchStart={() => changeLanguage('en')}
+            onClick={isTouch ? undefined : () => changeLanguage('en')}
             >English</option>
             <option value="ru"
-             onClick={() => changeLanguage('ru')}
-             onTouchEnd={() => changeLanguage('en')}
+             onClick={isTouch ? undefined : () => changeLanguage('ru')}
+             onTouchStart={() => changeLanguage('ru')}
              >Русский</option>
           </Form.Select>
           </Card.Text>
