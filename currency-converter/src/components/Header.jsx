@@ -35,8 +35,14 @@ import CurrencyContext from '../contexts/CurrencyContext';
           </Form.Select>
 
           <Form.Select size="sm" defaultValue={lang}>
-            <option value="en" onClick={() => changeLanguage('en')}>English</option>
-            <option value="ru" onClick={() => changeLanguage('ru')}>Русский</option>
+            <option value="en" 
+            onClick={() => changeLanguage('en')}
+            onTap={() => changeLanguage('en')}
+            >English</option>
+            <option value="ru"
+             onClick={() => changeLanguage('ru')}
+             onTap={() => changeLanguage('en')}
+             >Русский</option>
           </Form.Select>
           </Card.Text>
         </Card.Header>
