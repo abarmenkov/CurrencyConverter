@@ -37,13 +37,13 @@ import CurrencyContext from '../contexts/CurrencyContext';
             {list}
           </Form.Select>
 
-          <Form.Select size="sm" defaultValue={lang}>
-            <option value="en" 
+          <Form.Select size="sm" defaultValue={lang} style={{cursor: "pointer",}}>
+            <option value="en" style={{cursor: "pointer",}}
             //onTouchStart={() => changeLanguage('en')}
             //onClick={isTouch ? undefined : () => changeLanguage('en')}
             onClick={() => changeLanguage('en')}
             >English</option>
-            <option value="ru"
+            <option value="ru" style={{cursor: "pointer",}}
              //onClick={isTouch ? undefined : () => changeLanguage('ru')}
              onClick={() => changeLanguage('ru')}
              //onTouchStart={() => changeLanguage('ru')}
