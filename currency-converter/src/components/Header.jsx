@@ -11,8 +11,14 @@ import CurrencyContext from '../contexts/CurrencyContext';
     const [ exchangeRates, setExchangeRates] = useContext(CurrencyContext);
 
     const lang = i18n.resolvedLanguage;
-    const changeLanguage = (language) => {
+    /*const changeLanguage = (language) => {
       i18n.changeLanguage(language);
+    };*/
+
+    const changeLanguage = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      i18n.changeLanguage(e.target.value);
     };
 
     const changeBaseCurrency = (currency) => {
@@ -24,6 +30,7 @@ import CurrencyContext from '../contexts/CurrencyContext';
   const list = exchangeRates? makeList(exchangeRates.currencyList): null;
   /*if (typeof document !== 'undefined') {
     var isTouch = 'ontouchstart' in document.documentElement;
+    console.log(isTouch);
   }*/
 
     return (
@@ -37,16 +44,16 @@ import CurrencyContext from '../contexts/CurrencyContext';
             {list}
           </Form.Select>
 
-          <Form.Select size="sm" defaultValue={lang} style={{cursor: "pointer",}}>
-            <option value="en" style={{cursor: "pointer",}}
-            //onTouchStart={() => changeLanguage('en')}
+          <Form.Select size="sm" defaultValue={lang}>
+            <option value="en"
             //onClick={isTouch ? undefined : () => changeLanguage('en')}
-            onClick={() => changeLanguage('en')}
+            //onClick={() => changeLanguage('en')}
+            onClick={changeLanguage}
             >English</option>
-            <option value="ru" style={{cursor: "pointer",}}
+            <option value="ru"
              //onClick={isTouch ? undefined : () => changeLanguage('ru')}
-             onClick={() => changeLanguage('ru')}
-             //onTouchStart={() => changeLanguage('ru')}
+             //onClick={() => changeLanguage('ru')}
+             onClick={changeLanguage}
              >Русский</option>
           </Form.Select>
           </Card.Text>
