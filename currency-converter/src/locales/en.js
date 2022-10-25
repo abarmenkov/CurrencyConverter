@@ -15,7 +15,8 @@ const en = {
             charcode: 'CharCode',
             name: 'Name',
             nominal: 'Nominal',
-            value: 'Rate',          
+            value: 'Rate',   
+            loading: 'Loading Data',      
         },
         converter: {
             currencyselect: 'Select currency',

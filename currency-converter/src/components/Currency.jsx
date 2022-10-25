@@ -1,12 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import CurrencyContext from '../contexts/CurrencyContext';
 import { Card, Table, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const Currency = () => {
     const { t } = useTranslation();
-    const [ exchangeRates, ] = useContext(CurrencyContext);
+    const [loading, setLoading] = useState(true);
+    const [ exchangeRates, setExchangeRates] = useContext(CurrencyContext);
+
+    useEffect(() => {
+      const fetchRates = async () => {
+        try {
+          const rates = await axios('https://www.cbr-xml-daily.ru/daily_json.js');
+          const result = rates.data;
+          const currencyList1 = Object.keys(result.Valute);
+          const defaultList = exchangeRates.currencyList.slice();
+          const currencyList = defaultList.concat(currencyList1);
+          setExchangeRates({...exchangeRates, ...result, currencyList,});
+          setLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
+
+      }
+      fetchRates();
+    },[setExchangeRates, setLoading]);
 
     const trend = (current, previous) => {
         if (current > previous) return ' ▲';
@@ -38,7 +58,8 @@ const Currency = () => {
 
     return (
         <>
-        <Card.Body className="d-flex justify-content-around flex-column mb-3">
+        {loading ? (<p>{t('currencyTable.loading')}</p>) : (
+          <Card.Body className="d-flex justify-content-around flex-column mb-3">
             <Card.Title>{t('header.rates')}{exchangeRates?.Date}</Card.Title>
             <Table striped bordered hover size="sm">
               <thead>
@@ -62,6 +83,8 @@ const Currency = () => {
             <br />
 
         </Card.Body>
+        )}
+ 
 
         </>
 

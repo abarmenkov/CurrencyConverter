@@ -2,6 +2,7 @@ import { useState } from "react";
 import CurrencyContext from "./CurrencyContext";
 
 const CurrencyContextProvider = ({ children}) => {
+    
     const initialState = {
         Date: "",
         Valute: {

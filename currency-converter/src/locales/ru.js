@@ -16,6 +16,7 @@ const ru = {
             name: 'Валюта',
             nominal: 'Единиц',
             value: 'Курс',
+            loading: 'Загрузка данных',
         },
         converter: {
             currencyselect: 'Выберите валюту для обмена',
