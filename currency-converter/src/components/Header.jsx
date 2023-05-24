@@ -38,7 +38,7 @@ import CurrencyContext from '../contexts/CurrencyContext';
     <>
         <Card.Header className="d-flex justify-content-between align-items-center sticky-top bg-light">
           <Navbar expand="lg">
-            <Navbar.Brand href="/">{t('header.title')}</Navbar.Brand>
+            <Navbar.Brand href="/" data-testid='header-title'>{t('header.title')}</Navbar.Brand>
           </Navbar>
           <Card.Text className="d-flex justify-content-between">
           <Form className="d-flex justify-content-between align-items-center">

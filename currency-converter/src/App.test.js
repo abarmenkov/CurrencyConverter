@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import Converter from './components/Converter';
+import Header from './components/Header'
 
-test('renders button', () => {
-  render(<Converter />);
-  const linkElement = screen.getByRole('Button');
-  expect(linkElement).toBeInTheDocument();
-  screen.debug()
-});
+describe('headertest', () => {
+  test('renders header', () => {
+    render(<Header />);
+    expect(screen.getByTestId('header-title')).toBeInTheDocument();
+  });
+})
+
